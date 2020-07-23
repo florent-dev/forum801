@@ -1,0 +1,35 @@
+$colors:('bv', #2F7FCC),
+        ('r', #CB546B),
+        ('bl', #6C77C1),
+        ('j', #BABD2F),
+        ('n', #C2C2DA),
+        ('g', #606090),
+        ('v', #009D9D),
+        ('vp', #2ECF73),
+        ('vi', #C53DFF),
+        ('rose', #ED67EA),
+        ('cv', #2ECF73),
+        ('ch', #98E2EB),
+        ('cr', #EB1D51),
+        ('t', #A4CF9E),
+        ('cj', #BABD2F),
+;
+
+@mixin colors_generator() {
+  @each $color in $colors {
+    .#{nth($color, 1)} {
+      color: #{nth($color, 2)};
+    }
+  }
+}
+
+@mixin colors_bg_generator() {
+  @each $color in $colors {
+    .bg-#{nth($color, 1)} {
+      color: #{nth($color, 2)};
+    }
+  }
+}
+
+@include colors_generator();
+@include colors_bg_generator();

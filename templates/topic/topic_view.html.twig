@@ -1,0 +1,14 @@
+{% if topic %}
+    <div class="post message font-weight-bold v mb-2">{{ topic.name }}</div>
+    {% for message in topic.messages %}
+        <div class="post message mb-1">
+            <div class="message-left">
+                <div class="v font-weight-bold">{{ message.author.username }}</div>
+                <div class="date bl">{{ message.createdAt|date('d/m/Y H:i') }}</div>
+            </div>
+            <div class="message-right">{{ message.content }}</div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="post message r">Not Found</div>
+{% endif %}

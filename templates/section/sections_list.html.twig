@@ -1,0 +1,20 @@
+<div class="communities">
+    <img src="{{ asset('images/pays/gb.png') }}" /><img class="active" src="{{ asset('images/pays/fr.png') }}" /><img src="{{ asset('images/pays/br.png') }}" /><img src="{{ asset('images/pays/es.png') }}" /><img src="{{ asset('images/pays/pl.png') }}" /><img src="{{ asset('images/pays/tr.png') }}" /><img src="{{ asset('images/pays/de.png') }}" /><img src="{{ asset('images/pays/fi.png') }}" /><img src="{{ asset('images/pays/hr.png') }}" /><img src="{{ asset('images/pays/it.png') }}" /><img src="{{ asset('images/pays/id.png') }}" /><img src="{{ asset('images/pays/il.png') }}" /><img src="{{ asset('images/pays/lt.png') }}" /><img src="{{ asset('images/pays/jp.png') }}" /><img src="{{ asset('images/pays/sa.png') }}" /><img src="{{ asset('images/pays/ro.png') }}" /><img src="{{ asset('images/pays/ph.png') }}" /><img src="{{ asset('images/pays/nl.png') }}" /><img src="{{ asset('images/pays/sk.png') }}" /><img src="{{ asset('images/pays/lv.png') }}" /><img src="{{ asset('images/pays/vk.png') }}" />
+</div>
+
+{% set sortId = 0 %}
+{% for section in sections %}
+    {% if sortId < section.sort %}
+        <hr />
+    {% endif %}
+    <div class="section" onclick="loadSection({{ section.id }})">
+        <div class="section-icon">
+            <img alt="section" src="{{ asset('images/sections/'~ section.icon ~'.png') }}">
+        </div>
+        <div class="section-content">
+            <div class="section-name">{{ section.name }}</div>
+            <div class="section-flag"><img alt="flag" src="{{ asset('images/pays/'~ section.community.tag ~'.png') }}" /></div>
+        </div>
+    </div>
+    {% set sortId = section.sort %}
+{% endfor %}

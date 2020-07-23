@@ -1,0 +1,24 @@
+<div class="post">
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.section) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}
+</div>
+
+<script>
+    $('form#form_new_topic').submit(function(e) {
+        var formSerialize = $(this).serialize();
+
+        $.post('{{ path('app_topic_send_new') }}', formSerialize, function(response) {
+            console.log(response);
+            if (response.data === true) {
+                loadSection(currentSectionId);
+                $('section').html('');
+            }
+        });
+
+        e.preventDefault();
+    });
+</script>

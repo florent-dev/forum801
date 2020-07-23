@@ -1,0 +1,14 @@
+{% if app.user %}
+    <div class="float-right text-right">
+        <span class="pseudo">{{ app.user.username }}</span><a class="button" href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% else %}
+    <form class="my-2 my-lg-0 float-right text-right" method="post" action="{{ path('app_login') }}">
+
+        <input id="inputUsername" name="username" placeholder="Username" type="text" value="{% if error %}{{ error.messageKey|trans(error.messageData, 'security') }}{% else %}{{ last_username }}{% endif %}" required autofocus />
+        <button type="submit" style="width: 100px;">Sign in</button><br>
+        <input type="password" name="password" id="inputPassword" placeholder="Password" required />
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="button" value="Register" style="width: 100px;" />
+    </form>
+{% endif %}

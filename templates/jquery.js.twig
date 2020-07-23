@@ -1,0 +1,69 @@
+/**
+ * Variables
+ */
+let currentTopicId = 0;
+let currentSectionId = 0;
+
+/**
+ * Functions
+ */
+function loadSections() {
+    $.ajax({
+        url: "{{ path('app_section_home') }}",
+        method: 'post'
+    }).done(function (data) {
+        if (data) {
+            $('menu').html(data);
+        }
+    });
+}
+
+function loadSection(id) {
+    var url = '{{ path('app_section_show', {'id': 'id'}) }}';
+    url = url.replace('id', id);
+
+    $.ajax({
+        url: url,
+        method: 'post'
+    }).done(function (data) {
+        if (data) {
+            $('menu').html(data);
+            currentSectionId = id;
+        }
+    });
+}
+
+function loadTopic(id) {
+    var url = '{{ path('app_topic_show', {'id': 'id'}) }}';
+    url = url.replace('id', id);
+
+    $.ajax({
+        url: url,
+        method: 'post'
+    }).done(function (data) {
+        if (data) {
+            $('section').html(data);
+            $('#topic_'+currentTopicId+'.topic').css('background-color', '#274850');
+            $('#topic_'+id+'.topic').css('background-color', '#0E242D');
+            currentTopicId = id;
+        }
+    });
+}
+
+function newTopic(sectionId) {
+    var url = '{{ path('app_topic_new', {'sectionId': 'section_id'}) }}';
+    url = url.replace('section_id', sectionId);
+
+    $.ajax({
+        url: url,
+        method: 'post'
+    }).done(function (data) {
+        if (data) {
+            $('section').html(data);
+        }
+    });
+}
+
+function register() {
+    // TODO
+}

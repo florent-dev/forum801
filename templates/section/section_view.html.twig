@@ -1,0 +1,36 @@
+<div class="menu-content">
+
+    {% if section %}
+        <div class="section active" onclick="loadSections()">
+            <div class="section-icon">
+                <img alt="section" src="{{ asset('images/sections/'~ section.icon ~'.png') }}">
+            </div>
+            <div class="section-content">
+                <div class="section-name">{{ section.name }}</div>
+                <div class="section-flag"><img alt="flag" src="{{ asset('images/pays/'~ section.community.tag ~'.png') }}" /></div>
+            </div>
+        </div>
+
+        {% for topic in section.topics %}
+            <div class="topic" id="topic_{{ topic.id }}" onclick="loadTopic({{ topic.id }})">
+                <div class="topic-name">{{ topic.name }}</div>
+                <div class="topic-infos">
+                    <div class="topic-lastpost"><span class="bl">{{ topic.createdAt|date('d/m/Y H:i') }}, by</span> <span class="v">{{ topic.author.username }}</span></div>
+                    <div class="topic-counter v">{{ topic.messages|length }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="section" onclick="loadSections()">
+            <div class="section-icon"></div>
+            <div class="section-content">
+                <div class="section-name">Not Found</div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+<div class="menu-options">
+    <button onclick="newTopic({{ section.id }})">New topic</button>
+</div>
