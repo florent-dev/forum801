@@ -7,6 +7,7 @@ use App\Entity\Section;
 use App\Entity\Topic;
 use App\Entity\User;
 use App\Form\NewTopicType;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,7 +54,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("/newTopic", name="app_topic_send_new")
+     * @Route("/sendNewTopic", name="app_topic_send_new")
      * @param Request $request
      * @return JsonResponse
      * @throws \Exception
@@ -66,7 +67,7 @@ class TopicController extends AbstractController
         $form->handleRequest($request);
 
         /** @var User $user */
-        $user = $this->getUser();
+        $user = $this->getDoctrine()->getRepository(User::class)->find(1); // TODO : avec un user connecté
 
         if ($form->isSubmitted() && $form->isValid()) {
             $topic->setAuthor($user);
